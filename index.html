@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Peld Cool Waters</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: transparent;
+      transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+    }
+
+    header.scrolled {
+      position: fixed;
+      background-color: rgba(0, 119, 182, 0.95);
+      backdrop-filter: blur(6px);
+    }
+
+    .logo {
+      font-size: 3rem;
+      font-weight: bolder;
+      color: rgb(225, 225, 225);
+      font-family: serif;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: rgb(252, 249, 249);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 4rem;
+      list-style: none;
+      font-weight: bold;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-size: 1rem;
+      color: rgb(251, 250, 250);
+      transition: color 0.3s;
+    }
+
+    header.scrolled nav ul li a {
+      color: white;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 30%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      font-size: 4rem;
+      font-weight: bold;
+      font-family: serif;
+      z-index: 2;
+    }
+
+    .hero-subtext {
+      margin-top: 0.2rem;
+      margin-left: 60%;
+      font-size: 1.8rem;
+      color: white;
+      max-width: 100%;
+      text-align: left;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    }
+
+    .hero-text span.blue {
+      color: #1e7ddc;
+    }
+
+    .hero-text span.black {
+      color: #00FFFF;
+    }
+
+    .spacer {
+      background: #f4f4f4;
+      display: flex;
+      padding-top: 8px;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .spacer h2 {
+      color: rgba(5, 125, 188, var(--tw-text-opacity));
+      text-transform: uppercase;
+      font-family: serif;
+      font-size: .875rem;
+      letter-spacing: .25rem;
+      line-height: 1.5rem;
+      --tw-text-opacity: 1;
+      font-weight: 400;
+      letter-spacing: 0.02rem;
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 2rem;
+      padding: 2rem;
+      flex-wrap: wrap;
+      background: #f9fbfc;
+    }
+
+    .feature-item {
+      position: relative;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      flex: 1 1 350px;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 500px;
+    }
+
+  .feature-item a {
+  display: inline-block;
+  margin-top: 40px;
+  margin-bottom: 1rem;
+  align-self: center;
+  padding: 0.5rem 1.2rem;
+  background-color: #0077b6;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.feature-item a:hover {
+  background-color: #005f8a;
+}
+
+    .feature-item img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      filter: brightness(0.6);
+    }
+
+    .feature-content {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 1.5rem;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .feature-content h2 {
+      font-size: 1.5rem;
+      color: #0077b6;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-content h3 {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      color: #0077b6;
+    }
+
+    .feature-content p {
+      font-size: 0.95rem;
+      color: #333;
+      margin-top: 0.5rem;
+    }
+    .container {
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      background-color: #bfc0c6;
+       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+       border-radius: 10px;
+       padding: 10px;
+       margin: 0;
+
+    }
+    .jerican-container {
+  position: relative;
+  width: 300px;
+  margin: 2rem auto;
+}
+
+.jerican {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: block;
+}
+
+.mineral {
+  position: absolute;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 8px 10px;
+  border-radius: 50%;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  animation: float 3s ease-in-out infinite;
+  opacity: 0.85;
+  text-align: center;
+}
+
+
+.mineral1 {
+  background-color: #66bb6a; 
+  top: 55%; left: 30%;
+  animation-delay: 0s;
+}
+.mineral2 {
+  background-color: #42a5f5; 
+  top: 50%; left: 65%;
+  animation-delay: 0.4s;
+}
+.mineral3 {
+  background-color: #fbc02d; 
+  top: 60%; left: 70%;
+  animation-delay: 0.8s;
+}
+.mineral4 {
+  background-color: #ef5350; 
+  top: 58%; left: 40%;
+  animation-delay: 1.2s;
+}
+.mineral5 {
+  background-color: #ab47bc; 
+  top: 52%; left: 50%;
+  animation-delay: 1.6s;
+}
+.mineral6 {
+  background-color: #5c6bc0; 
+  top: 57%; left: 58%;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-25px) scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+}
+
+    @media (max-width: 900px) {
+      .menu-icon {
+        display: block;
+        order: 1;
+      }
+
+      .hero-text {
+        font-size: 2rem;
+      }
+
+      .hero-subtext {
+        max-width: 100%;
+        font-size: 1rem;
+      }
+
+      .logo {
+        order: 2;
+        font-size: 1.5rem;
+      }
+
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        display: none;
+        background-color: #0077b6;
+        padding: 1rem 2rem;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      nav ul li a {
+        color: white !important;
+      }
+
+      .features {
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+      }
+      
+    }
+    
+    .abouy-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    .image-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.15);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .image-card:hover {
+      transform: scale(1.02);
+    }
+
+    .card-img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+      margin: 20px auto 0;
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+      animation: pulse 2.5s infinite ease-in-out;
+      transition: transform 0.4s ease;
+    }
+
+    .card-img:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(0, 123, 255, 0.6);
+      }
+      100% {
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+      }
+    }
+
+    .card-text {
+      padding: 1.8rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #2b2b2b;
+      text-align: center;
+    }
+
+    .card-text h2 {
+      color: #0077b6;
+      margin-bottom: 1rem;
+    }
+
+    .card-text p {
+      margin-bottom: 1rem;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 12px 30px;
+      background-color: #0077b6;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      background-color: #005f91;
+    }
+    .location-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #333;
+}
+
+.location-container h2 {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  color: #2980b9;
+}
+
+.location-container p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+  </style>
+</head>
+<body>
+
+<header id="navbar">
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  <div class="logo">PELD COOL WATERS</div>
+  <nav>
+    <ul id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#About">About Us</a></li>
+      <li><a href="contact-us.html">Contact Us</a></li>
+      <li><a href="service.html">Order now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="https://videos.pexels.com/video-files/3958714/3958714-sd_640_360_30fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="video-overlay"></div>
+  <div class="hero-text">
+    <div><span class="black">Cool</span><span class="blue"> Water</span><span class="black"> for drinking?</span></div>
+    <div><span class="blue">PELD</span><span class="black"> got you.</span></div>
+    <p class="hero-subtext">Every sip, a mark of purity.</p>
+  </div>
+</div>
+
+<div class="spacer">
+  <h2 style="padding: 2rem;">Built on quality, bottled for you</h2>
+  <h2 style="color: black; font-size: 2rem; text-transform:capitalize;">Make Peld Cool Waters your choice</h2>
+  <p style="margin-top: 15px;">Premium-quality water, crafted to meet your needs.</p>
+</div>
+
+<div class="features">
+  <div class="feature-item">
+    <img src="https://images.pexels.com/photos/327090/pexels-photo-327090.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Clean Water">
+    <div class="feature-content">
+      <h2>Know what you drink</h2>
+      <p>At PELD COOL WATERS, we provide pure, safe water through advanced reverse osmosis and careful packaging.</p>
+      <h3>RO Water Treatment</h3>
+      <p>Removes impurities by forcing water through a membrane, leaving it clean and refreshing.</p>
+       <p>Our system uses multiple steps to ensure purity:</p>
+      <h4>Pre-filtration</h4>
+      <p>Removes large particles like sand and rust.</p>
+      <h4>Activated Carbon Filter</h4>
+      <p>Eliminates chlorine, odors, and organic chemicals.</p>
+      <h4>RO Membrane</h4>
+      <p>Filters dissolved salts, bacteria, and viruses.</p>
+      <h4>UV Sterilization</h4>
+      <p>Uses UV light to kill remaining microorganisms.</p>
+      <a href="service.html">Order now</a>
+
+    </div>
+  </div>
+
+  <div class="feature-item">
+    <img src="https://images.unsplash.com/photo-1700497918461-c6bf827cad58?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2F0ZXIlMjBkZWxpdmVyeXxlbnwwfHwwfHx8MA%3D%3D" alt="Delivery">
+    <div class="feature-content">
+      <h2>Delivery</h2>
+      <p>"Need it delivered? We’ve got you! Choose doorstep delivery at a small fee, or swing by our water station for pickup. And guess what? Orders of 20 bales or more get free delivery!"</p>
+      <h3>Service Reach</h3>
+      <p>Available in Bungoma and expanding further for your convenience.</p>
+       <a href="service.html">Order now</a>
+    </div>
+  </div>
+</div>
+ <div class="container">
+  <h2 style="font-size: xx-large; font-family: serif; color: #005f8a;">PELD WATER COMPOSITION</h2>
+   <div class="jerican-container">
+   
+  <img src="./image/peld.png" class="jerican" alt="20L Dispenser"/>
+
+  <div class="mineral mineral1">Ca</div>
+  <div class="mineral mineral2">Mg</div>
+  <div class="mineral mineral3">Na</div>
+  <div class="mineral mineral4">K</div>
+  <div class="mineral mineral5">F</div>
+  <div class="mineral mineral6">Fe</div>
+</div>
+<div style="font-family: serif; font-style: italic; font-weight: 900;">
+ <p>Calcium - 1.0</p>
+ <p>Magnesium- 0.1</p>
+ <p>PH - 6.2</p>
+ <p>Phosphate-0.1</p>
+ <p>Chlorine - 3.0</p>
+</div>
+</div>
+
+  <div class="about-container" id="About">
+    <div class="image-card">
+      <img src="./image/peld-bottle.png" alt="PELD Bottle" class="card-img">
+      <div class="card-text">
+        <h2>About Us</h2>
+        <p>
+          At PELD COOL WATERS, we believe that clean and affordable drinking water is not a luxury—it’s a basic human right. We are dedicated to delivering purified water to homes, offices, and businesses with professionalism, consistency, and care.
+        </p>
+        <p>
+          Our services are designed to be fast, affordable, and convenient. Whether you need a few bottles or a full bale, we ensure timely delivery and excellent customer experience.
+        </p>
+
+        <h2>Kuhusu Sisi</h2>
+        <p>
+          PELD COOL WATERS tunaamini kuwa maji safi na salama ya kunywa si anasa bali ni haki ya kila mtu. Tumejitoa kuhakikisha tunakuletea maji safi nyumbani, kazini, au dukani kwa uaminifu na huduma bora.
+        </p>
+        <p>
+          Huduma zetu ni za haraka, nafuu na zinazojali muda wako. Iwe unahitaji chupa chache au mzigo mzima, tutakuletea kwa wakati na kwa huduma ya kipekee.
+        </p>
+
+        <a href="contact-us.html" class="contact-btn">Contact Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="location-container" id="location" >
+  <h2 style="margin: 20px 0; color: #0077b6;">Find Us Here</h2>
+  <button 
+    style="padding: 10px 20px; font-size: 16px; background-color: #0077b6; color: white; border: none; border-radius: 5px; cursor: pointer;"
+    onclick="window.open('https://maps.app.goo.gl/zX9WVN8AGJ9NNeyU6', '_blank')"
+  >
+    Open Location in Google Maps
+  </button>
+</div>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('show');
+  }
+
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+</script>
+<footer style="background-color: #0077b6; color: white; padding: 2rem 1rem; margin-top: 3rem;">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 2rem; max-width: 1200px; margin: auto;">
+    <div style="flex: 1 1 250px;">
+      <h3 style="font-family: serif; font-size: 1.5rem;">PELD COOL WATERS</h3>
+      <p style="margin-top: 0.5rem; font-size: 0.95rem;">Clean. Safe. Refreshing. Serving Bungoma and beyond with the purest drinking water solutions.</p>
+    </div>
+
+    <div style="flex: 1 1 150px;">
+      <h4 style="font-size: 1.2rem;">Quick Links</h4>
+      <ul style="list-style: none; padding: 0; margin-top: 0.5rem;">
+        <li><a href="index.html" style="color: white; text-decoration: none;">Home</a></li>
+        <li><a href="#About" style="color: white; text-decoration: none;">About</a></li>
+        <li><a href="service.html" style="color: white; text-decoration: none;">Services</a></li>
+        <li><a href="contact-us.html" style="color: white; text-decoration: none;">Contact</a></li>
+      </ul>
+    </div>
+
+    <div style="flex: 1 1 200px;">
+      <h4 style="font-size: 1.2rem;">Contact Us</h4>
+      <p style="margin-top: 0.5rem;">Phone: +254 27577420<br>Email: .....</p>
+    </div>
+  </div>
+
+  <hr style="margin: 2rem auto; border: 0.5px solid rgba(255,255,255,0.2); max-width: 90%;" />
+
+  <p style="text-align: center; font-size: 0.9rem;">&copy; 2025 Peld Cool Waters. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+
+
+
+

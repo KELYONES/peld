@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services - PELD COOL WATERS</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f9ff;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #0077b6;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.1);
+      text-align: center;
+    }
+
+    .product h3 {
+      color: #0077b6;
+      margin-bottom: 10px;
+    }
+
+    .product p {
+      margin: 10px 0;
+    }
+
+    .product input {
+      width: 60px;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .product button {
+      background: #0077b6;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .product button:hover {
+      background: #005f8e;
+    }
+
+    .cart {
+      margin-top: 40px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.1);
+    }
+
+    .cart h2 {
+      margin-bottom: 20px;
+      color: #0077b6;
+    }
+
+    .cart ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .cart ul li {
+      margin-bottom: 10px;
+    }
+
+    .checkout {
+      margin-top: 20px;
+    }
+
+    .checkout button {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .checkout button:hover {
+      background: #1ebe5d;
+    }
+
+    .checkout.cashout {
+      margin-top: 10px;
+    }
+
+    .checkout.cashout button {
+      background: #004d00;
+    }
+
+    .checkout.cashout button:hover {
+      background: #003300;
+    }
+
+    #mpesa {
+      padding: 2rem;
+      background: #e0f7fa;
+      margin-top: 50px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Order Water</h1>
+    <div class="product-list">
+      <div class="product">
+        <h3>500ml Bottle</h3>
+        <p>KES 20</p>
+        <input type="number" min="0" value="0" id="b500" />
+        <button onclick="addToCart('500ml Bottle', 20, 'b500')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>1L Bottle</h3>
+        <p>KES 40</p>
+        <input type="number" min="0" value="0" id="b1l" />
+        <button onclick="addToCart('1L Bottle', 40, 'b1l')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>Bale (PELD Logo)</h3>
+        <p>KES 360</p>
+        <input type="number" min="0" value="0" id="bale360" />
+        <button onclick="addToCart('Bale (PELD)', 360, 'bale360')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>Bale (Custom Branded)</h3>
+        <p>KES 380</p>
+        <input type="number" min="0" value="0" id="bale380" />
+        <button onclick="addToCart('Bale (Custom)', 380, 'bale380')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>Refill 20L (Come with Bottle)</h3>
+        <p>KES 200</p>
+        <input type="number" min="0" value="0" id="refill20" />
+        <button onclick="addToCart('Refill 20L Only', 200, 'refill20')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>20L Bottle + Water</h3>
+        <p>KES 350</p>
+        <input type="number" min="0" value="0" id="refill350" />
+        <button onclick="addToCart('20L + Water', 350, 'refill350')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>10L (Come with Bottle)</h3>
+        <p>KES 100</p>
+        <input type="number" min="0" value="0" id="refill10" />
+        <button onclick="addToCart('10L + Bottle', 100, 'refill10')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>10L + Water (Bottle N/A)</h3>
+        <p style="color: gray">KES 200 (Temporarily unavailable)</p>
+      </div>
+    </div>
+
+    <div class="cart">
+      <h2>Cart</h2>
+      <ul id="cart-list"></ul>
+      <p><strong>Total: </strong>KES <span id="total">0</span></p>
+      <div class="checkout">
+        <button onclick="sendPhoto()">Send Your Photo for custom branded via WhatsApp</button>
+      </div>
+      <div class="checkout cashout">
+        <button onclick="cashOut()">Cash Out via M-Pesa</button>
+      </div>
+    </div>
+  </div>
+
+  <section id="mpesa">
+    <h2>M-Pesa Payment</h2>
+    <p>Please follow the instructions to complete your payment via M-Pesa.</p>
+    <ol>
+      <li>Go to your M-Pesa menu on your phone.</li>
+      <li>Select <strong>Send Money</strong></li>
+      <li>Enter the phone number: <strong>0798678017</strong>.</li>
+      <li>Enter the amount: The total amount from your order.</li>
+      <li>Enter your M-Pesa PIN and confirm.</li>
+      <li>Send us the transaction confirmation code via WhatsApp.</li>
+    </ol>
+  </section>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price, inputId) {
+      const quantity = parseInt(document.getElementById(inputId).value);
+      if (quantity > 0) {
+        cart.push({ name, price, quantity });
+        updateCart();
+        document.getElementById(inputId).value = 0;
+      }
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById("cart-list");
+      cartList.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.quantity} x ${item.name} = KES ${item.quantity * item.price}`;
+        cartList.appendChild(li);
+        total += item.quantity * item.price;
+      });
+      document.getElementById("total").textContent = total;
+    }
+
+    function sendPhoto() {
+      const message = "Hello, I’d like to send my photo for custom branding. Kindly find the attached.";
+      const whatsappURL = `https://wa.me/254798678017?text=${encodeURIComponent(message)}`;
+      window.open(whatsappURL, '_blank');
+    }
+
+    function cashOut() {
+      const confirmed = confirm("Do you want to cash out via M-Pesa?");
+      if (confirmed) {
+        const mpesaSection = document.getElementById('mpesa');
+        if (mpesaSection) {
+          mpesaSection.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.location.href = 'mpesa.html';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
+
+
